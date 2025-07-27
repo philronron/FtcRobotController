@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Interface.DriveSystem;
 
-/**
+/*
  * Mecanum Drive System Implementation
  * Handles 4-wheel mecanum drive calculations and motor control
  * Located in: teamcode/StudentBase/
@@ -13,14 +13,14 @@ import org.firstinspires.ftc.teamcode.Interface.DriveSystem;
  */
 public class MecanumDrive implements DriveSystem {
 
-    private DcMotor frontLeft;
-    private DcMotor frontRight;
-    private DcMotor backLeft;
-    private DcMotor backRight;
+    private DcMotor frontLeft = null;
+    private DcMotor frontRight = null;
+    private DcMotor backLeft = null;
+    private DcMotor backRight = null;
     private HardwareMap hardwareMap;
     private Telemetry telemetry;
 
-    /**
+    /*
      * Constructor - initializes the mecanum drive system
      */
     public MecanumDrive(HardwareMap hardwareMap, Telemetry telemetry) {
@@ -30,7 +30,7 @@ public class MecanumDrive implements DriveSystem {
         initializeMotors();
     }
 
-    /**
+    /*
      * Initialize and configure the drive motors
      */
     private void initializeMotors() {
@@ -46,6 +46,9 @@ public class MecanumDrive implements DriveSystem {
         frontRight.setDirection(DcMotor.Direction.FORWARD);
         backRight.setDirection(DcMotor.Direction.FORWARD);
 
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
+
         // Set motors to brake when power is zero
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -53,13 +56,16 @@ public class MecanumDrive implements DriveSystem {
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
-    /**
+    /*
      * Drive the robot using mecanum wheel calculations
+     * Uses Theta to find the angle to find the speed.
      */
     @Override
     public void drive(double forward, double strafe, double rotate) {
         // Mecanum drive math
-        double frontLeftPower = forward + strafe + rotate;
+
+        // Commented out code that works :)
+       /* double frontLeftPower = forward + strafe + rotate;
         double frontRightPower = forward - strafe - rotate;
         double backLeftPower = forward - strafe + rotate;
         double backRightPower = forward + strafe - rotate;
@@ -77,6 +83,25 @@ public class MecanumDrive implements DriveSystem {
             backLeftPower /= maxPower;
             backRightPower /= maxPower;
         }
+        */
+
+        double theta = Math.atan2(forward, strafe);
+        double power = Math.hypot(strafe, forward);
+        double sin = Math.sin(theta - Math.PI/4);
+        double cos = Math.cos(theta - Math.PI/4);
+        double maxPower = Math.max(Math.abs(sin), Math.abs(cos));
+
+        double frontLeftPower = power * cos / maxPower + rotate;
+        double frontRightPower = power * sin / maxPower - rotate;
+        double backLeftPower = power * sin / maxPower + rotate;
+        double backRightPower = power * cos / maxPower - rotate;
+
+        if ((power + Math.abs(rotate)) > 1) {
+            frontLeftPower /= power + rotate;
+            frontRightPower /= power + rotate;
+            backLeftPower /= power + rotate;
+            backRightPower /= power + rotate;
+        }
 
         // Set motor powers
         frontLeft.setPower(frontLeftPower);
@@ -85,7 +110,7 @@ public class MecanumDrive implements DriveSystem {
         backRight.setPower(backRightPower);
     }
 
-    /**
+    /*
      * Stop all drive motors
      */
     @Override
@@ -96,7 +121,7 @@ public class MecanumDrive implements DriveSystem {
         backRight.setPower(0);
     }
 
-    /**
+    /*
      * Get telemetry data for the drive system
      */
     public void updateTelemetry() {

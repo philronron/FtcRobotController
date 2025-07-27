@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.Interface;
 
-/**
+/*
  * Drive System Interface
  *
  * Defines the contract for all drive systems (mecanum, tank, swerve, etc.)
@@ -8,7 +8,7 @@ package org.firstinspires.ftc.teamcode.Interface;
  */
 public interface DriveSystem {
 
-    /**
+    /*
      * Drive the robot with given inputs
      * @param forward Forward/backward movement (-1.0 to 1.0)
      * @param strafe Left/right movement (-1.0 to 1.0)
@@ -16,7 +16,7 @@ public interface DriveSystem {
      */
     void drive(double forward, double strafe, double rotate);
 
-    /**
+    /*
      * Stop all drive motors
      */
     void stop();

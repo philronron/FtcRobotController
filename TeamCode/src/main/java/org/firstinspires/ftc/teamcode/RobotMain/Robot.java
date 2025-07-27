@@ -1,9 +1,16 @@
-package org.firstinspires.ftc.teamcode.StudentBase;
+package org.firstinspires.ftc.teamcode.RobotMain;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Interface.ClimbingSystem;
 import org.firstinspires.ftc.teamcode.Interface.DriveSystem;
+import org.firstinspires.ftc.teamcode.Interface.GripperSystem;
+import org.firstinspires.ftc.teamcode.Interface.IntakeSystem;
+import org.firstinspires.ftc.teamcode.Interface.LauncherSystem;
+import org.firstinspires.ftc.teamcode.Interface.LinearMovementSystem;
+import org.firstinspires.ftc.teamcode.Interface.RotationalMovementSystem;
+import org.firstinspires.ftc.teamcode.Interface.SensorSystem;
 
 /**
 *
@@ -34,7 +41,13 @@ public abstract class Robot {
 
     // Drive system - students can use any DriveSystem implementation
     protected DriveSystem driveSystem;
-
+    protected ClimbingSystem climbingSystem;
+    protected GripperSystem gripperSystem;
+    protected IntakeSystem intakeSystem;
+    protected LauncherSystem launcherSystem;
+    protected LinearMovementSystem linearMovementSystem;
+    protected RotationalMovementSystem rotationalMovementSystem;
+    protected SensorSystem sensorSystem;
     /**
      * Constructor - Sets up the robot with FTC hardware
      */
@@ -57,13 +70,13 @@ public abstract class Robot {
      * Main update method - called every loop cycle
      */
     public void update() {
-        periodicUpdate();
+        MovementUpdate();
     }
 
     /**
      * Students implement this with their robot's main logic
      */
-    protected abstract void periodicUpdate();
+    protected abstract void MovementUpdate();
 
     /**
      * Stop the robot (including drive system)

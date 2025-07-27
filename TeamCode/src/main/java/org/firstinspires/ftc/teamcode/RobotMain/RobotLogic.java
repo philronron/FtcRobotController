@@ -1,27 +1,41 @@
-package org.firstinspires.ftc.teamcode.RobotCode;
-import org.firstinspires.ftc.teamcode.StudentBase.Robot;
+package org.firstinspires.ftc.teamcode.RobotMain;
 import org.firstinspires.ftc.teamcode.StudentBase.MecanumDrive;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class MecanumRobot extends Robot {
+public class RobotLogic extends Robot {
 
     private MecanumDrive mecanumDrive;
 
-    public MecanumRobot(HardwareMap hardwareMap, Telemetry telemetry, Gamepad gamepad1, Gamepad gamepad2) {
+    public RobotLogic(HardwareMap hardwareMap, Telemetry telemetry, Gamepad gamepad1, Gamepad gamepad2) {
         super(hardwareMap, telemetry, gamepad1, gamepad2);
     }
 
+
+    /*
+     * Initilise your robot here
+     *
+     * you need to create a new system for every part that needs a movement.
+     * this will allow for multiple systems to be their own object to be manipulated
+     * for TeleOp or Autonomous
+     */
     @Override
     protected void initializeRobot() {
         // Create the mecanum drive system
         mecanumDrive = new MecanumDrive(hardwareMap, telemetry);
-        driveSystem = mecanumDrive; // Set the drive system
+        driveSystem = mecanumDrive; // Set the drive system in case there is more than 1 type of drive
     }
 
+    /*
+     * This is where you place the movement logic
+     * that gets passed to the Robot class in RobotMain.
+     *
+     * Place the inputs into here and pass that to the appropriate class you create in
+     * the student base.
+     */
     @Override
-    protected void periodicUpdate() {
+    protected void MovementUpdate() {
 
         // Get gamepad inputs
         double forward = -gamepad1.left_stick_y;  // Forward/backward
