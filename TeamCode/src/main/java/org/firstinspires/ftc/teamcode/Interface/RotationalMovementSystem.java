@@ -14,27 +14,10 @@ public interface RotationalMovementSystem {
     void rotateToAngle(double angle);
 
     /*
-     * Rotate with continuous power
+     * Set speed of rotation
      * @param power Power level (-1.0 to 1.0)
      */
-    void setPower(double power);
-
-    /*
-     * Get current angle
-     * @return Current angle in degrees
-     */
-    double getCurrentAngle();
-
-    /*
-     * Check if rotation is complete
-     * @return true if at target angle
-     */
-    boolean isAtTarget();
-
-    /*
-     * Stop rotation
-     */
-    void stop();
+    void setSpeed(double power);
 
     /*
      * Set angle limits for safety

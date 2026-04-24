@@ -8,33 +8,31 @@ package org.firstinspires.ftc.teamcode.Interface;
  */
 public interface LinearMovementSystem {
     /*
-     * Move to a specific position
-     * @param position Target position (encoder counts, inches, etc.)
+     * Extend climbing mechanism
      */
-    void moveToPosition(double position);
+    void extend();
 
     /*
-     * Move with continuous power
-     * @param power Power level (-1.0 to 1.0)
+     * Retract climbing mechanism
      */
-    void setPower(double power);
+    void retract();
+
+    /*
+     * Stop all climbing movement
+     */
+    void stop();
+
+    /*
+     * Set a position compared to the set limit
+     * @param power Extension length (0 to 1.0)
+     */
+    void setPosition(double power);
 
     /*
      * Get current position
      * @return Current position in configured units
      */
     double getCurrentPosition();
-
-    /*
-     * Check if movement is complete
-     * @return true if at target position
-     */
-    boolean isAtTarget();
-
-    /*
-     * Stop all movement
-     */
-    void stop();
 
     /*
      * Set position limits for safety

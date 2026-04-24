@@ -10,7 +10,6 @@ import org.firstinspires.ftc.teamcode.Interface.IntakeSystem;
 import org.firstinspires.ftc.teamcode.Interface.LauncherSystem;
 import org.firstinspires.ftc.teamcode.Interface.LinearMovementSystem;
 import org.firstinspires.ftc.teamcode.Interface.RotationalMovementSystem;
-import org.firstinspires.ftc.teamcode.Interface.SensorSystem;
 
 /**
 *
@@ -47,7 +46,6 @@ public abstract class Robot {
     protected LauncherSystem launcherSystem;
     protected LinearMovementSystem linearMovementSystem;
     protected RotationalMovementSystem rotationalMovementSystem;
-    protected SensorSystem sensorSystem;
     /**
      * Constructor - Sets up the robot with FTC hardware
      */
