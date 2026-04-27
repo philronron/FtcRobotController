@@ -18,25 +18,8 @@ public interface ClimbingSystem {
     void retract();
 
     /*
-     * Start climbing sequence
-     */
-    void startClimb();
-
-    /*
      * Stop all climbing movement
      */
     void stop();
-
-    /*
-     * Check if robot is attached to climbing structure
-     * @return true if attached and ready to climb
-     */
-    boolean isAttached();
-
-    /*
-     * Check if climbing is complete
-     * @return true if successfully climbed
-     */
-    boolean isClimbComplete();
 }
 

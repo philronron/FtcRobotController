@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.RobotMain.RobotLogic;
  *
  * Fall back to your last iteration if you break the code updating this.
  */
-@TeleOp(name = "Mecanum Drive", group = "Student")
+@TeleOp(name = "MecanumDrive", group = "Student")
 public class RobotTeleOp extends OpMode {
 
     private RobotLogic robot;
